@@ -1,0 +1,31 @@
+---- Main
+--- Games
+
+-- 2 Player Evoloution Simulator
+- Collect all fruits
+- AutoKOTH
+- Auto Flags
+
+-- Combat Warriors
+- TP Respawn
+- Killaura
+
+-- Stand Upright: Rebooted
+- Fix LoopCollect
+- Killaura
+- GodMode
+
+--- UI
+-- Make buttons cooler
+- Images
+- Easier to make
+
+-- Add Settings
+- Username Prefernece
+- Saving settings
+
+-- Add Sections to the bottom bar (e.g. Misc, Combat, Collection)
+- The sections depend on the game
+- There can be 'slots' so it's easier to make
+
+--- Key System
