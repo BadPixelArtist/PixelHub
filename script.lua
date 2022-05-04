@@ -11,9 +11,7 @@ if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 
-_G.Key = "Developing"
-
-if not _G.Key or _G.Key ~= "Developing" then
+if not _G.Key or _G.Key ~= "Release" then
     game.Players.LocalPlayer:Kick('Not a valid key!')
 end
 
@@ -139,10 +137,10 @@ end
 
 local function SendNotification(Title, Message, Duration)
     -- Sends a default roblox notification
-    StarterGui:SetCore("SendNotfication",{
+    game.StarterGui:SetCore("SendNotification", {
         Title = Title,
         Text = Text,
-        Duration = Duration
+        Duration = Duration,
     })
 end
 
@@ -164,7 +162,7 @@ local function Typewrite(Message, GUI)
         else
             GUI.Text = string.sub(Message, 1, i)
         end
-        task.wait(0.02)
+        task.wait(0.04)
     end
 end
 
@@ -246,10 +244,6 @@ end)
 --[=[ Main ]=]--
 local function SetupGame()
     if GameId == 8540168650 then
-        --[=[ Notes ]=]--
-        -- JohnnyJoestar
-        -- Dio's Diary, Requiem Arrow
-
         _G.PHImportant = {
             ["Items"] = workspace.Items,
             ["Characters"] = workspace.Living,
@@ -265,7 +259,7 @@ local function SetupGame()
         CreateScrollingFrame('SU:B')
 
         CreateButton('CollectItems', 'Collect all items!')
-        -- CreateButton('LoopCollectItems', 'Loop Collect items!')
+        CreateButton('LoopCollectItems', 'Loop Collect items!')
         CreateButton('AutoDash', 'Loop the ALT Dash!')
         CreateButton('StartAllQuests', 'Activates all Quests!')
         CreateButton('RedeemAllQuests', 'Redeems all Quests!')
@@ -281,25 +275,25 @@ local function SetupGame()
             end
         end)
 
-        --[[ScriptGUIS["Button-LoopCollectItems"].MouseButton1Click:Connect(function()
+        ScriptGUIS["Button-LoopCollectItems"].MouseButton1Click:Connect(function()
             _G.SURSettingsPH["AutoCollectItems"] = not _G.SURSettingsPH["AutoCollectItems"]
             if _G.SURSettingsPH["AutoCollectItems"] == true then
                 ScriptGUIS["Button-LoopCollectItems"].Text = 'Unloop Collect Items'
             else
                 ScriptGUIS["Button-LoopCollectItems"].Text = 'Loop Collect Items'
             end
-            while true do
-                if _G.SURSettingsPH["AutoCollectItems"] == true then
-                    for i, v in pairs(_G.PHImportant["Items"]:GetChildren()) do
-                        local Tween = CreateTweenCharacterTo(v.Handle.Position, false)
-                        Tween:Play()
-                        Tween.Completed:Wait()
-                        task.wait(.3)
-                    end
+            if _G.SURSettingsPH["AutoCollectItems"] == true then
+                for i, v in pairs(_G.PHImportant["Items"]:GetChildren()) do
+                    local Tween = CreateTweenCharacterTo(v.Handle.Position, false)
+                    Tween:Play()
+                    Tween.Completed:Wait()
+                    task.wait(.3)
                 end
-                task.wait(.3)
+                _G.PHImportant["Items"].ChildAdded:Connect(function()
+                    
+                end)
             end
-        end)]]
+        end)
 
         ScriptGUIS["Button-AutoDash"].MouseButton1Click:Connect(function()
             _G.SURSettingsPH.AutoDash = not _G.SURSettingsPH.AutoDash
@@ -342,6 +336,10 @@ local function SetupGame()
                 SendNotification('Important Spawn!', Child.Name, 5)
             end
         end)
+    elseif GameId == 4282985734 then
+        SendNotification('Not Finished!')
+    elseif GameId == 3017870574 then
+        SendNotification('Not Finished!')
     else
         game.Players.LocalPlayer:Kick('Not a supported game!')
     end
